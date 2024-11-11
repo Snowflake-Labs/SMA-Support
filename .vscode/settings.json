@@ -1,0 +1,12 @@
+{
+    "notebook.output.scrolling": true,
+    "notebook.output.textLineLimit": 30,
+    "notebook.output.wordWrap": true,
+    "notebook.lineNumbers": true,
+    "notebook.cellToolbarLocation": "right",
+    "notebook.consolidatedRunButton": true,
+    "notebook.dragAndDropEnabled": true,
+    "notebook.cellFocusIndicator": "border",
+    "notebook.showFoldingControls": "always",
+    "notebook.formatOnCellExecution": true
+}

@@ -1,0 +1,13 @@
+name: app_environment
+channels:
+  - snowflake
+dependencies:
+  - natsort=7.1.1
+  - openpyxl=3.0.10
+  - plotly=5.9.0
+  - pydotplus=2.0.2
+  - pyyaml=6.0
+  - snowflake-snowpark-python=
+  - xlsxwriter=3.1.1
+  - streamlit=1.35.0
+  - jira=2.0.0

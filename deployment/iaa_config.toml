@@ -1,0 +1,10 @@
+local_key_path = "Optional: Path to your local RSA key"
+
+[connections.iaa]
+account = "ORGANIZATION-ACCOUNT"
+user = "USERNAME"
+password = "PASSWORD"
+database = "DATABASE"
+schema = "SCHEMA"
+warehouse = "WAREHOUSE"
+role = "ACCOUNTADMIN"
