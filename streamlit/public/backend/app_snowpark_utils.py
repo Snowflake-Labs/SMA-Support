@@ -406,7 +406,6 @@ def _get_base_path():
 
 def create_session():
     session = Session.builder.getOrCreate()
-    session.query_tag = '{"origin":"sf_sit","name":"iaa","version":{"major":0,"minor":5,"patch":55}'
     return session
 
 @st.cache_resource(ttl=600)
