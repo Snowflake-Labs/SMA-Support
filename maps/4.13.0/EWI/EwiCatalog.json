@@ -526,7 +526,7 @@
     "ELEMENT": "spark.conf.get",
     "CATEGORY": "ConversionError",
     "DEPRECATED_VERSION": "0.0.0",
-    "SHORT_DESCRIPTION": "{0} is not supported with Platform specific key.",
+    "SHORT_DESCRIPTION": "{0} Platform specific key is not supported.",
     "GENERAL_DESCRIPTION": "Key is not supported with Platform specific key.",
     "LONG_DESCRIPTION": ""
   },
@@ -832,7 +832,7 @@
     "ELEMENT": "",
     "CATEGORY": "Warning",
     "DEPRECATED_VERSION": "",
-    "SHORT_DESCRIPTION": "The element has a direct mapping, with few scenarios not supported. Check Snowpark Pandas documentation for more detail.",
+    "SHORT_DESCRIPTION": "{0} has a direct mapping, with few scenarios not supported. Check Snowpark Pandas documentation for more detail.",
     "GENERAL_DESCRIPTION": "There are scenarios not supported",
     "LONG_DESCRIPTION": ""
   },
