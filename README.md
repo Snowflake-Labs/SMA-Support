@@ -10,4 +10,4 @@ Please find below the corresponding documentation:
 
 If you found an issue, please open an issue [here](https://github.com/Snowflake-Labs/IAA-Support/issues/new?assignees=&labels=Issue&projects=&template=iaa-issue.md) project.
 
-Or contact us at ***sma-support at snowflake dot com***
+Or contact us at **sma-support@snowflake.com**
