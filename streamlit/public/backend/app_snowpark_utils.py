@@ -192,8 +192,10 @@ def split_frame(input_df, rows):
     return df
 
 
-def add_spacing():
-    st.text("")
+def add_spacing(spaces_count=1):
+    while spaces_count > 0:
+        st.text("")
+        spaces_count -= 1
 
 
 def pagination_footer(dataset, key_prefix, need_color_legend=False, legend: Callable = None):
@@ -218,19 +220,23 @@ def pagination_footer(dataset, key_prefix, need_color_legend=False, legend: Call
                 if int(len(dataset) / batch_size) > 0
                 else 1
             )
-            current_page = st.number_input(
-                "Page",
-                key=f"pag_curr_page_{key_prefix}",
-                min_value=1,
-                max_value=total_pages,
-                step=1,
-            )
+            col1, col2 = st.columns(2)
+            with col2:
+                current_page = st.number_input(
+                    "Page",
+                    key=f"pag_curr_page_{key_prefix}",
+                    min_value=1,
+                    max_value=total_pages,
+                    step=1,
+                )
+            with col1:
+                add_spacing(2)
+                st.markdown(f"Page **{current_page}** of **{total_pages}** ")
         with bottom_menu[0]:
             if legend is not None:
                 legend()
             if need_color_legend and key_prefix == "dependency_table":
                 color_legend_dependencies()
-        st.markdown(f"Page **{current_page}** of **{total_pages}** ")
 
     return batch_size, current_page
 
