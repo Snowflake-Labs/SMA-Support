@@ -1,3 +1,4 @@
+from typing import List
 import streamlit as st
 import pandas as pd
 import public.backend.app_snowpark_utils as utils
@@ -31,12 +32,21 @@ def generateDependencyReport(df_dependencies):
         df_dependencies_styled.to_excel(writer, sheet_name=SHEET_DEPENDENCIES,index=False)
     return output
 
+
+def check_pending_list(execution_ids: List[str]):
+    df_pending_list = backend.get_pending_execution_list(execution_ids)
+    if df_pending_list.shape[0] > 0:
+        for pending in df_pending_list.itertuples(index=False):
+            st.warning(f"The dependencies for execution {pending.EXECUTION_ID} could not be calculated.\nPlease contact support at sma-support@snowflake.com.")
+
+
 @errorHandling.executeFunctionWithErrorHandling
-def dependency_report(executionIds):
-    if executionIds is None or len(executionIds) <= 0:
+def dependency_report(execution_ids):
+    if execution_ids is None or len(execution_ids) <= 0:
         emptyScreen.show()
     else:
-        df_dependencies = backend.get_dependencies(executionIds)
+        check_pending_list(execution_ids)
+        df_dependencies = backend.get_dependencies(execution_ids)
         df_dependencies[COLUMN_DEPENDENCIES] = df_dependencies[COLUMN_DEPENDENCIES].apply(lambda x: None if x == "[]" else x)
         if df_dependencies.shape[0] > 0:
             df_dependencies[FRIENDLY_NAME_SOURCE_FILE] = df_dependencies[FRIENDLY_NAME_SOURCE_FILE]
@@ -47,7 +57,7 @@ def dependency_report(executionIds):
                 else:
                     st.warning("No dependencies were found.")
                 if 'selected_option' not in st.session_state:
-                    button_dependencies(df_dependencies, executionIds)
+                    button_dependencies(df_dependencies, execution_ids)
             with st.expander("Dependencies Graph"):
                 has_dependencies = _has_dependencies(df_dependencies)
                 if not has_dependencies:
@@ -56,7 +66,7 @@ def dependency_report(executionIds):
                     st.info("""
         Choose a file from the dropdown menu below. This will show all the dependencies with that file as the root node. You will be able to view other files that are dependent on selected file.
         """)
-                    dependency_graph_figure, df_dependencies_by_file = dependency_analysis_single2(executionIds)
+                    dependency_graph_figure, df_dependencies_by_file = dependency_analysis_single2(execution_ids)
                     config = {
                     'staticPlot': True,
                     'modeBarButtonsToRemove': ["toImage"],
@@ -70,7 +80,7 @@ def dependency_report(executionIds):
             st.info("Dependencies have not been calculated, please try later.")
 
         if 'selected_option' in st.session_state:
-            button_dependencies(df_dependencies, executionIds)
+            button_dependencies(df_dependencies, execution_ids)
 
 def button_dependencies(df_dependencies, execution_ids):
     if st.button("Generate Dependencies Report", key="generate_dependencies"):

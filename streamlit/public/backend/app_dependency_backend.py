@@ -1,3 +1,5 @@
+from typing import List
+import pandas
 from public.backend.globals import *
 from snowflake.snowpark.functions import col
 from public.backend.query_quality_handler import with_table_quality_handler
@@ -70,3 +72,10 @@ def get_grouped_dependencies(df_dependencies):
     })
     
     return result
+
+def get_pending_execution_list(execution_ids: List[str]) -> pandas.DataFrame:
+    session = utils.get_session()
+    pending_execution_list = session.table(TABLE_PENDING_EXECUTION_LIST) \
+                               .where(col(COLUMN_EXECUTION_ID).isin(execution_ids))
+
+    return pending_execution_list.to_pandas()
