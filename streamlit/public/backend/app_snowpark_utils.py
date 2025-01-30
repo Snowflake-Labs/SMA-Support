@@ -616,3 +616,19 @@ def reset_index(df: pd.DataFrame) -> pd.DataFrame:
     df_indexed = df.copy()
     df_indexed.index = np.arange(1, len(df)+1)
     return df_indexed
+
+
+def register_app_log(session: Session,
+                     message: str,
+                     application: str = Applications.IAA,
+                     customer_email: str = None,
+                     execution_id: str = None):
+    try:
+        final_message = message.replace("'", "")
+        db = session.get_current_database()
+        schema = session.get_current_schema()
+        query = f"CALL {db}.{schema}.INSERT_APP_LOG('{application}','{final_message}','{customer_email}','{execution_id}')"
+
+        session.sql(query).collect()
+    except Exception as e:
+        print(e)

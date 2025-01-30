@@ -411,3 +411,7 @@ SMA_OUTPUT_FILES_TABLES = [
 DOC_URL = "https://docs.snowconvert.com/sma/issue-analysis/workarounds"
 
 MAPPINGS_FEEDBACK_URL = "https://github.com/Snowflake-Labs/IAA-Support/issues/new?assignees=&labels=Issue&projects=&template=iaa-issue.md&title=%5BMake+sure+the+title+matches+the+mapping+name%5D"
+
+class Applications:
+    IAA = "IAA"
+    WE = "WE"
