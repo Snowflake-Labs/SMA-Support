@@ -45,7 +45,7 @@ def third_party_review(executionIds):
             if st.button("Export table", "third-party-dwn"):
                 utils.generateExcelFile(
                     df,
-                    backend.SHEET_THIRD_PARTY,
+                    third_party_usages_backend.SHEET_THIRD_PARTY,
                     "Download third-party",
                     f"third-party-{utils.getFileNamePrefix(executionIds)}.xlsx",
                 )
